@@ -1,9 +1,9 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
     <div class="container mt-3">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="card border-1 shadow rounded">
                     <div class="card-body">
                         <form action="{{ route('rating_usia-update', $ratings->id) }}" method="POST" enctype="multipart/form-data">

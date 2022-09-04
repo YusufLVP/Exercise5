@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Movie extends Model
 {
     use HasFactory;
-    protected $fillable=['judul','genre_id','rating_usia_id','negara','sutradara','studio','durasi','rate','rilis','sinopsis'];
+    protected $fillable=['judul','genre_id','rating_usia_id','negara','sutradara','studio','durasi','rate','rilis','sinopsis','poster'];
 
     public function RatingUsia(){
         return $this->belongsTo(RatingUsia::class);
     }
     public function Genre(){
-        return $this->belongsTo(Genre::class);
+        return $this->belongsToMany(Genre::class);
     }
 }

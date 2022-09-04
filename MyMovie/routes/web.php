@@ -16,16 +16,18 @@ use App\Http\Controllers\RatingUsiaController;
 |
 */
 
-Route::get('/', function () {
-    return view('layout');
-});
 
+Route::middleware('auth')->group(function(){
+    Route::get('/dashboard', function () {
+    return view('layouts.app');
+});
 Route::get('/movie/index',[MovieController::class,'index'])->name('movie-index');
 Route::get('/movie/create',[MovieController::class,'create'])->name('movie-create');
 Route::post('/movie/store',[MovieController::class,'store'])->name('movie-store');
 Route::get('/movie/edit/{id}',[MovieController::class,'edit'])->name('movie-edit');
 Route::patch('/movie/update/{id}',[MovieController::class,'update'])->name('movie-update');
 Route::delete('/movie/destroy/{id}',[MovieController::class,'destroy'])->name('movie-destroy');
+Route::get('/movie/poster',[MovieController::class,'poster'])->name('poster');
 
 Route::get('/genre/index',[GenreController::class,'index'])->name('genre-index');
 Route::get('/genre/create',[GenreController::class,'create'])->name('genre-create');
@@ -42,3 +44,13 @@ Route::get('/rating_usia/edit/{id}',[RatingUsiaController::class,'edit'])->name(
 Route::patch('/rating_usia/update/{id}',[RatingUsiaController::class,'update'])->name('rating_usia-update');
 Route::delete('/rating_usia/destroy/{id}',[RatingUsiaController::class,'destroy'])->name('rating_usia-destroy');
 
+Route::get('/templates', function() {
+    return view('layouts.app');
+});
+Route::get('/tabel', function() {
+    return view('movie.tables');
+});
+});
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

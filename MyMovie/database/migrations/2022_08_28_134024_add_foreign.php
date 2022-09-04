@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('movies', function(Blueprint $table){
-            $table->unsignedBigInteger("genre_id")->nullable()->after('judul');
-            $table->foreign("genre_id")->references("id")->on("genres")->onDelete("RESTRICT")->onUpdate("CASCADE");
-            $table->unsignedBigInteger("rating_usia_id")->nullable()->after('genre_id');
+            // $table->unsignedBigInteger("genre_id")->nullable()->after('judul');
+            // $table->foreign("genre_id")->references("id")->on("genres")->onDelete("RESTRICT")->onUpdate("CASCADE");
+            $table->unsignedBigInteger("rating_usia_id")->nullable()->after('judul');
             $table->foreign("rating_usia_id")->references("id")->on("rating_usias")->onDelete("RESTRICT")->onUpdate("CASCADE");
         });
         
@@ -30,8 +30,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('movies', function(Blueprint $table){
-            $table->dropForeign("movies_genre_id_foreign");
-            $table->dropColumn("genre_id");
+            // $table->dropForeign("movies_genre_id_foreign");
+            // $table->dropColumn("genre_id");
             $table->dropForeign("movies_rating_usia_id_foreign");
             $table->dropColumn("rating_usia_id");
         });

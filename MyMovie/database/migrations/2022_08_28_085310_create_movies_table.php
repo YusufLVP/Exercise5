@@ -23,6 +23,7 @@ return new class extends Migration
             $table->double('rate')->nullable();
             $table->date('rilis')->nullable();
             $table->text('sinopsis');
+            $table->string('poster')->nullable();
             $table->timestamps();
         });
     }

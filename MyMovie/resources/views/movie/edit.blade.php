@@ -1,9 +1,41 @@
-@extends('layout')
+@extends('layouts.app')
+
+@section('style')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+
+    <style>
+        /* Check out later: https://bbbootstrap.com/snippets/accordion-hover-effect-26103860 */
+
+        .mt-100 {
+            margin-top: 50px;
+        }
+
+        body {
+            background: grey;
+            color: #514B64;
+            min-height: 100vh
+        }
+
+        h2 {
+            color: darkgreen;
+        }
+
+        #css-dropdown {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            width: 300px;
+            height: 42px;
+            margin: 100px auto 0 auto;
+        }
+    </style>
+@endsection
 
 @section('content')
     <div class="container mt-3">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="card border-1 shadow rounded">
                     <div class="card-body">
                         <form action="{{ route('movie-update', $movies->id) }}" method="POST" enctype="multipart/form-data">
@@ -13,13 +45,15 @@
                             <div class="input-group mb-3">
                                 <input name="judul" type="text" class="form-control" id="judul" value="{{ $movies->judul }}">
                             </div>
-                            <label for="genre" class="form-label">Genre</label>
-                            <select class="custom-select d-block w-100 form-control" id="genre" name="genre_id">
-                                <option selected>Pilih Genre</option>
-                                @foreach ($genres as $genre)
-                                    <option value="{{ $genre->id }}"  {{ $genre->id === $movies->genre_id ? 'selected' : '' }}>{{ $genre->genre }}</option>
-                                @endforeach
-                            </select>
+                           
+                            <div class="col-md-13"> 
+                                <select id="choices-multiple-remove-button" name="genre_id[]"
+                                    placeholder="Pilih Genre" multiple>
+                                    @foreach($genres as $genre)
+                                    <option value="{{ $genre->id }}">{{ $genre->genre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <label for="ratings" class="form-label">Rating Usia</label>
                             <select class="custom-select d-block w-100 form-control" id="ratings" name="rating_usia_id">
                                 <option selected>Pilih Rating Usia</option>
@@ -63,3 +97,25 @@
         </div>
     </div>
 @endsection
+
+
+@section('script')
+    <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js"
+        integrity="sha512-CX7sDOp7UTAq+i1FYIlf9Uo27x4os+kGeoT7rgwvY+4dmjqV0IuE/Bl5hVsjnQPQiTOhAX1O2r2j5bjsFBvv/A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function() {
+
+            var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+                removeItemButton: true,
+                maxItemCount: 10,
+                searchResultLimit: 5,
+                renderChoiceLimit: 5
+            });
+
+
+        });
+    </script>
+@endsection
+

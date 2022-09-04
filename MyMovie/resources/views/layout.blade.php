@@ -9,6 +9,7 @@
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
 </head>
+@yield('style')
 <style>
 * {
   margin: 0;
@@ -110,5 +111,7 @@ menu_btn.addEventListener("click", () => {
 });
 
 </script>
+
+@yield('script')
 
 </html>

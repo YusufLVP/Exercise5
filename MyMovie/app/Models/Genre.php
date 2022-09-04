@@ -12,6 +12,6 @@ class Genre extends Model
     protected $fillable=['genre','deskripsi'];
 
     public function grup(){
-        return $this->hasMany(Movie::class);
+        return $this->belongsToMany(Movie::class);
     }
 }
